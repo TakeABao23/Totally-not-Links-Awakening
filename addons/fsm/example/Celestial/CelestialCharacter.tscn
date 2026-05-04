@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cpeb8wnru2not"]
+
+[ext_resource type="Script" uid="uid://6v7nibywdm8r" path="res://addons/fsm/FiniteStateMachine.gd" id="1_sst55"]
+[ext_resource type="Script" uid="uid://b7v3gwost5rrf" path="res://addons/fsm/example/Celestial/states/CelestialBasic.gd" id="2_sst55"]
+[ext_resource type="Script" uid="uid://bgad8cjq7jv38" path="res://addons/fsm/example/Celestial/states/CelestialDash.gd" id="3_bvmyo"]
+[ext_resource type="Script" uid="uid://bjwxvxuhexls4" path="res://addons/fsm/example/Celestial/states/CelestialWallslide.gd" id="4_cbace"]
+
+[sub_resource type="GDScript" id="GDScript_f7ahu"]
+script/source = "extends CharacterBody2D
+
+@export var speed = 150
+@export var jump_velocity = -400.0
+@export var grav = 300
+
+@onready var fsm = $FiniteStateMachine
+@onready var basic = $FiniteStateMachine/CelestialBasicState
+@onready var dash = $FiniteStateMachine/RLDashState
+@onready var wallslide = $FiniteStateMachine/CelestialWallSlide
+
+var dpad_nerf = 1
+
+func _ready() -> void:
+	fsm.link(basic,\"dashed\",dash)
+	fsm.link(basic,\"started_wallslide\",wallslide)
+
+func _physics_process(delta: float) -> void:
+	dpad_nerf = clamp(dpad_nerf+(delta/2),0,1)
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l2ngy"]
+height = 38.0
+
+[node name="CelestialCharacter" type="CharacterBody2D" unique_id=458612283]
+script = SubResource("GDScript_f7ahu")
+jump_velocity = -300.0
+
+[node name="FiniteStateMachine" type="Node" parent="." unique_id=1778254563]
+script = ExtResource("1_sst55")
+metadata/_custom_type_script = "uid://6v7nibywdm8r"
+
+[node name="CelestialBasicState" type="Node" parent="FiniteStateMachine" unique_id=1201255399]
+script = ExtResource("2_sst55")
+jump_speed = -300
+grav = 600
+coyote_time_duration = 1.0
+metadata/_custom_type_script = "uid://b7v3gwost5rrf"
+
+[node name="RLDashState" type="Node" parent="FiniteStateMachine" unique_id=1157828230]
+script = ExtResource("3_bvmyo")
+metadata/_custom_type_script = "uid://bgad8cjq7jv38"
+
+[node name="CelestialWallSlide" type="Node" parent="FiniteStateMachine" unique_id=869192127]
+script = ExtResource("4_cbace")
+metadata/_custom_type_script = "uid://bjwxvxuhexls4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=260227991]
+shape = SubResource("CapsuleShape2D_l2ngy")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1057663039]
+color = Color(0.74693966, 0.07607218, 0.33204895, 1)
+polygon = PackedVector2Array(-10, -17, -10, 17, -5, 17, -3, 7, 3, 7, 5, 17, 10, 17, 10, -18)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D" unique_id=1588628738]
+polygon = PackedVector2Array(-6, -12, -7, -6, 7, -7, 4, -14)
