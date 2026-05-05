@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1rtuaoha3xld"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_12hib"]
+
+[node name="Link" type="Sprite2D" unique_id=965642988]
+texture = SubResource("CompressedTexture2D_12hib")
