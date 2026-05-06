@@ -1,30 +1,26 @@
-class_name Link extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 var cardinal_dir : Vector2 = Vector2.DOWN
 var dir : Vector2 = Vector2.ZERO
-var move_speed : float = 50
-var state : String = "idle"
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var state_machine: PlayerStateMachine = $StateMachine
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	state_machine.Initialize(self)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	dir.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 	dir.y = Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
-	
-	velocity = dir * move_speed
-	if SetState() == true || SetDirection() == true:
-		UpdateAnimation()
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 	
@@ -43,14 +39,7 @@ func SetDirection() -> bool:
 	sprite.flip_h = true if cardinal_dir == Vector2.LEFT else false
 	return true
 
-func SetState() -> bool:
-	var new_state : String = "idle" if dir == Vector2.ZERO else "move"
-	if new_state == state:
-		return false
-	state = new_state
-	return true
-	
-func UpdateAnimation() -> void:
+func UpdateAnimation(state : String) -> void:
 	animation_player.play(state + "-" + AnimDirection())
 	pass
 	
