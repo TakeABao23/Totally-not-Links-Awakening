@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b4i458m4plg7f"]
+
+[ext_resource type="Script" uid="uid://bvr3jensg1d7s" path="res://Player/Scripts/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://y3k0a1ebtk87" path="res://Player/Sprites/idle-walk.png" id="1_l8h54"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ns7xx"]
+
+[node name="Link" type="CharacterBody2D" unique_id=1454604290]
+script = ExtResource("1_4ntmi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=465541708]
+shape = SubResource("CircleShape2D_ns7xx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1705924103]
+texture = ExtResource("1_l8h54")
+hframes = 4
