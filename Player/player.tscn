@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://vrx6cqlo23ko" path="res://Player/Scripts/state_idle.gd" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://cai36epallhoa" path="res://Player/Scripts/state_walk.gd" id="5_k53q1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ns7xx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
+size = Vector2(9, 10)
 
 [sub_resource type="Animation" id="Animation_4ntmi"]
 length = 0.001
@@ -133,10 +134,12 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1454604290]
+collision_mask = 16
 script = ExtResource("1_4ntmi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=465541708]
-shape = SubResource("CircleShape2D_ns7xx")
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_k53q1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1705924103]
 texture = ExtResource("1_l8h54")

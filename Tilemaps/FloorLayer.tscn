@@ -4,3 +4,4 @@
 
 [node name="Floor Layer" type="TileMapLayer" unique_id=400731555]
 tile_set = ExtResource("1_gvalr")
+collision_enabled = false

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://i3b5bg06sa00"]
+
+[ext_resource type="TileSet" uid="uid://b31hal5annrsr" path="res://Tilemaps/overworld.tres" id="1_caygg"]
+
+[node name="Tilemap" type="TileMapLayer" unique_id=400731555]
+tile_set = ExtResource("1_caygg")
