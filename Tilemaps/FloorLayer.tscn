@@ -2,5 +2,5 @@
 
 [ext_resource type="TileSet" uid="uid://b31hal5annrsr" path="res://Tilemaps/overworld.tres" id="1_gvalr"]
 
-[node name="Overworld01" type="TileMapLayer" unique_id=400731555]
+[node name="Floor Layer" type="TileMapLayer" unique_id=400731555]
 tile_set = ExtResource("1_gvalr")
